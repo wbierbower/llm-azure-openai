@@ -445,8 +445,8 @@ class _AzureShared:
             # Use Azure OpenAI key from initialization or get from key parameter
             if self.api_key:
                 kwargs["api_key"] = self.api_key
-            elif self.needs_key:
-                kwargs["api_key"] = self.get_key(key)
+            # elif self.needs_key:
+            #     kwargs["api_key"] = self.get_key(key)
             else:
                 # OpenAI-compatible models don't need a key, but the
                 # openai client library requires one
@@ -483,8 +483,8 @@ class _AzureShared:
 
 
 class AzureChat(_AzureShared, KeyModel):
-    needs_key = "azure-openai"
-    key_env_var = "AZURE_OPENAI_API_KEY"
+    # needs_key = "azure-openai"
+    # key_env_var = "AZURE_OPENAI_API_KEY"
     default_max_tokens = None
 
     class Options(SharedOptions):
@@ -534,8 +534,8 @@ class AzureChat(_AzureShared, KeyModel):
 
 
 class AsyncAzureChat(_AzureShared, AsyncKeyModel):
-    needs_key = "azure-openai"
-    key_env_var = "AZURE_OPENAI_API_KEY"
+    # needs_key = "azure-openai"
+    # key_env_var = "AZURE_OPENAI_API_KEY"
     default_max_tokens = None
 
     class Options(SharedOptions):
@@ -646,8 +646,8 @@ class AzureCompletion(AzureChat):
 
 
 class AzureOpenAIEmbeddingModel(EmbeddingModel):
-    needs_key = "azure-openai"
-    key_env_var = "AZURE_OPENAI_API_KEY"
+    # needs_key = "azure-openai"
+    # key_env_var = "AZURE_OPENAI_API_KEY"
     batch_size = 100
 
     def __init__(self, model_id, model_name, api_key=None, api_version="2023-12-01-preview", azure_endpoint=None, dimensions=None, azure_ad_token_provider=None):
