@@ -1,6 +1,6 @@
 # llm-azure-openai
 
-[![PyPI](https://img.shields.io/pypi/v/llm-gemini.svg)](https://pypi.org/project/llm-azure-openai/)
+[![PyPI](https://img.shields.io/pypi/v/llm-azure-openai.svg)](https://pypi.org/project/llm-azure-openai/)
 [![Changelog](https://img.shields.io/github/v/release/wbierbower/llm-azure-openai?include_prereleases&label=changelog)](https://github.com/wbierbower/llm-azure-openai/releases)
 [![Tests](https://github.com/wbierbower/llm-azure-openai/workflows/Test/badge.svg)](https://github.com/wbierbower/llm-azure-openai/actions?query=workflow%3ATest)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/wbierbower/llm-azure-openai/blob/main/LICENSE)
