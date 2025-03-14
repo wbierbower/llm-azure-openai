@@ -455,14 +455,11 @@ class _AzureShared:
         if os.environ.get("LLM_OPENAI_SHOW_RESPONSES"):
             kwargs["http_client"] = logging_client()
 
-        from pprint import pprint
         if async_:
             model = openai.AsyncAzureOpenAI(**kwargs)
-            pprint(model.__dict__)
             return model
         else:
             model = openai.AzureOpenAI(**kwargs)
-            pprint(model.__dict__)
             return model
 
     def build_kwargs(self, prompt, stream):
