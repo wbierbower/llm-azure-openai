@@ -1,0 +1,31 @@
+[project]
+name = "llm-azure-openai"
+version = "0.1.0"
+description = "LLM plugin to access Azure OpenAI models"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "llm>=0.23",
+    "httpx",
+    "ijson",
+    "azure-identity"
+]
+
+[project.urls]
+Homepage = "https://github.com/wbierbower/llm-azure-openai"
+Changelog = "https://github.com/wbierbower/llm-azure-openai/releases"
+Issues = "https://github.com/wbierbower/llm-azure-openai/issues"
+CI = "https://github.com/wbierbower/llm-azure-openai/actions"
+
+[project.entry-points.llm]
+gemini = "llm_azure_openai"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-recording", "pytest-asyncio", "nest-asyncio"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
