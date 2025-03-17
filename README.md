@@ -74,6 +74,10 @@ To run the tests:
 pytest
 ```
 
+## Security
+
+This package is signed using [sigstore](https://sigstore.dev/) to provide supply chain security. When you install this package from PyPI, you can verify its authenticity by checking the digital signatures.
+
 <!-- This project uses [pytest-recording](https://github.com/kiwicom/pytest-recording) to record Gemini API responses for the tests.
 
 If you add a new test that calls the API you can capture the API response like this:

@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write  # Needed for sigstore attestation
 
 jobs:
   test:
@@ -40,11 +41,13 @@ jobs:
         cache-dependency-path: setup.py
     - name: Install dependencies
       run: |
-        pip install setuptools wheel twine build
-    - name: Publish
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        pip install setuptools wheel build
+    - name: Build package
       run: |
         python -m build
-        twine upload dist/*
+    - name: Publish to PyPI with sigstore attestation
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.PYPI_TOKEN }}
+        verify-metadata: true
+        sign: true  # Enable sigstore signing
