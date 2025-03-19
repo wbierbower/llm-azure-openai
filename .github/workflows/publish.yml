@@ -47,7 +47,3 @@ jobs:
         python -m build
     - name: Publish to PyPI with sigstore attestation
       uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        password: ${{ secrets.PYPI_TOKEN }}
-        verify-metadata: true
-        sign: true  # Enable sigstore signing
