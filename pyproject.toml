@@ -11,7 +11,7 @@ dependencies = [
     "llm>=0.23",
     "httpx",
     "ijson",
-    "azure-identity"
+    "azure-identity>=1.10.1"
 ]
 
 [project.urls]
