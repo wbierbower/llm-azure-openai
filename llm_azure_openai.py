@@ -16,7 +16,7 @@ from enum import Enum
 # import httpx
 import openai
 import os
-from azure.identity import EnvironmentCredential, get_bearer_token_provider
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 
 from pydantic import field_validator, Field
 
@@ -49,12 +49,14 @@ def register_models(register):
         can_stream = azure_model.get("can_stream", True)
         allows_system_prompt = azure_model.get("allows_system_prompt", True)
         use_azure_ad = azure_model.get("use_azure_ad", True)
+        scope = azure_model.get("scope", "https://cognitiveservices.azure.com/.default")
 
         # Set up Azure AD token provider if specified
         azure_ad_token_provider = None
         if use_azure_ad:
             azure_ad_token_provider = get_bearer_token_provider(
-                EnvironmentCredential(), "https://cognitiveservices.azure.com/.default"
+                DefaultAzureCredential(),
+                scope
             )
 
         if can_stream is False:
