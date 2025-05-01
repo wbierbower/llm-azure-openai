@@ -1,0 +1,70 @@
+name: "CodeQL Security Analysis"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    # Run weekly at 5:30 UTC on Monday morning
+    - cron: '30 5 * * 1'
+
+jobs:
+  analyze:
+    name: Analyze Code
+    runs-on: ubuntu-latest
+
+    # Required permissions for the CodeQL action.
+    # security-events is required to upload results to GitHub Security tab.
+    # actions:read is required for the workflow run context.
+    # contents:read is required to check out the code.
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      # If you analyze multiple languages, you can use a matrix strategy
+      # matrix:
+      #   language: [ 'javascript', 'python' ]
+      # Then reference ${{ matrix.language }} below
+
+    steps:
+    # Step 1: Check out repository code so CodeQL can analyze it
+    - name: Checkout repository
+      uses: actions/checkout@v4 # Use the latest major version
+
+    # Step 2: Initialize the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3 # Use the latest major version
+      with:
+        # Specify the language(s) to analyze.
+        # Supported languages: C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript, Python, Ruby, Swift
+        # Replace 'javascript' with the language(s) of your project.
+        # Use a comma-separated list for multiple languages, e.g., 'javascript, python'
+        # Or use the matrix strategy defined above: languages: ${{ matrix.language }}
+        languages: python
+
+        # Optional: Define queries to run. Could be standard suite (security-extended, security-and-quality)
+        # or path to a custom query file (.qls)
+        # queries: security-extended
+
+        # Optional: Specify configuration file
+        # config-file: ./.github/codeql/codeql-config.yml
+
+    # Step 3: Autobuild (for compiled languages like C/C++, C#, Go, Java/Kotlin, Swift)
+    # The Autobuilder attempts to detect and build your project automatically.
+    # If your project requires custom build steps, replace this 'autobuild' step
+    # with your own build commands (`run: | make all`, `run: mvn package`, etc.).
+    # For interpreted languages (JavaScript, Python, Ruby, TypeScript), you can often omit this step entirely.
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3 # Use the latest major version
+
+    # Step 4: Perform the CodeQL analysis.
+    # Results will be uploaded to GitHub Security tab -> Code scanning alerts.
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3 # Use the latest major version
+      # Optional: Specify category for SARIF results (useful with matrix strategy)
+      # with:
+      #   category: "/language:${{matrix.language}}"
